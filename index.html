@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d17"><title>SignalBreak | Signal Research Workbench</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+<div class="brand"><span class="brand-mark">S</span><div><strong>SignalBreak</strong><small>RESEARCH WORKBENCH</small></div></div>
+<nav aria-label="Main navigation">
+<button class="nav-item active" data-view="overview">◈ <span>Overview</span></button>
+<button class="nav-item" data-view="rf">⌁ <span>RF Intelligence</span></button>
+<button class="nav-item" data-view="simulator">▦ <span>Digital Simulator</span></button>
+<button class="nav-item" data-view="shield">⬡ <span>SignalBreak Shield</span></button>
+<button class="nav-item" data-view="license">⚿ <span>License & Access</span></button>
+</nav>
+<div class="sidebar-foot"><span class="status-dot"></span> LOCAL MODE <small>No transmission</small></div>
+</aside>
+<main class="main">
+<header class="topbar"><div><span class="eyebrow">SIGNAL RESEARCH / LOCAL INSTANCE</span><h1 id="page-title">Overview</h1></div><div class="top-actions"><span class="pill"><i class="status-dot"></i> OFFLINE-FIRST</span><button class="icon-button" id="lock-button" title="Emergency lock">⌑</button></div></header>
+<div class="notice"><strong>SAFE RESEARCH MODE</strong><span>RF analysis uses imported captures or synthetic samples. The simulator operates only on synthetic in-memory data. No RF transmission or live-network modification.</span></div>
+<section class="view active" id="view-overview">
+<div class="hero"><div><span class="eyebrow">SIGNALBREAK CORE</span><h2>Understand the signal.<br><em>Keep the boundary.</em></h2><p>A local-first environment for examining recorded RF measurements and modeling digital network conditions safely.</p><button class="primary" data-go="rf">Open RF Intelligence <b>→</b></button></div><div class="hero-orbit"><div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit-core">SB<span>CORE</span></div></div></div>
+<div class="metrics"><article class="metric"><span>RF CAPTURE</span><strong id="metric-captures">0</strong><small>Imported sessions</small></article><article class="metric"><span>ANALYSIS STATUS</span><strong class="good">READY</strong><small>Local processing</small></article><article class="metric"><span>SIMULATOR</span><strong id="metric-sim">IDLE</strong><small>Synthetic data only</small></article><article class="metric"><span>SHIELD</span><strong class="good" id="metric-shield">ACTIVE</strong><small>Local integrity monitor</small></article></div>
+<div class="section-heading"><div><span class="eyebrow">WORKSPACES</span><h3>Research modules</h3></div></div>
+<div class="module-grid"><button class="module-card" data-go="rf"><span>⌁</span><b>RF Intelligence</b><small>Import CSV or JSON measurements, inspect trends and anomalies.</small><i>OPEN MODULE →</i></button><button class="module-card" data-go="simulator"><span>▦</span><b>Digital Research Simulator</b><small>Model packet loss, latency and jitter with generated test data.</small><i>OPEN MODULE →</i></button><button class="module-card" data-go="shield"><span>⬡</span><b>SignalBreak Shield</b><small>Review local events, verify app files and create a safe journal backup.</small><i>OPEN MODULE →</i></button></div>
+</section>
+<section class="view" id="view-rf">
+<div class="section-heading"><div><span class="eyebrow">MODULE 01 / RF INTELLIGENCE</span><h2>Capture analysis</h2><p>Analyze previously recorded measurements. No radio hardware is accessed.</p></div><button class="secondary" id="sample-capture">Load sample capture</button></div>
+<div class="panel"><div class="panel-head"><div><h3>Import measurement file</h3><p>Supported: CSV or JSON. Expected fields include timestamp, frequency, power or rssi.</p></div><label class="file-button">Choose file<input id="capture-file" type="file" accept=".csv,.json,application/json,text/csv"></label></div><div id="capture-status" class="muted">No capture loaded.</div><div class="chart-wrap"><canvas id="rf-chart" height="220" aria-label="RF measurement chart"></canvas></div><div class="table-wrap"><table><thead><tr><th>TIME</th><th>FREQUENCY</th><th>POWER / RSSI</th></tr></thead><tbody id="capture-rows"><tr><td colspan="3" class="muted">Import a capture to view measurements.</td></tr></tbody></table></div></div>
+<div class="metrics compact"><article class="metric"><span>MEASUREMENTS</span><strong id="rf-count">0</strong></article><article class="metric"><span>AVERAGE POWER</span><strong id="rf-average">—</strong></article><article class="metric"><span>PEAK POWER</span><strong id="rf-peak">—</strong></article></div>
+</section>
+<section class="view" id="view-simulator">
+<div class="section-heading"><div><span class="eyebrow">MODULE 02 / DIGITAL RESEARCH SIMULATOR</span><h2>Network condition lab</h2><p>All packets are synthetic objects in browser memory. Nothing is sent to or changed on a network.</p></div><span class="pill warning">SYNTHETIC ONLY</span></div>
+<div class="sim-layout"><div class="panel"><h3>Scenario controls</h3><label class="control">Packet count <output id="count-out">100</output><input id="packet-count" type="range" min="20" max="1000" step="20" value="100"></label><label class="control">Packet loss <output id="loss-out">2%</output><input id="loss" type="range" min="0" max="50" value="2"></label><label class="control">Added latency <output id="latency-out">40 ms</output><input id="latency" type="range" min="0" max="500" step="5" value="40"></label><label class="control">Jitter <output id="jitter-out">10 ms</output><input id="jitter" type="range" min="0" max="200" step="5" value="10"></label><div class="button-row"><button class="primary" id="run-sim">Run synthetic test</button><button class="secondary" id="reset-sim">Reset</button></div></div><div class="panel results"><span class="eyebrow">LATEST RUN</span><div class="result-number" id="delivered">—</div><p>Packets delivered</p><div class="result-line"><span>Simulated loss</span><b id="result-loss">—</b></div><div class="result-line"><span>Mean latency</span><b id="result-latency">—</b></div><div class="result-line"><span>Latency spread</span><b id="result-jitter">—</b></div><div id="sim-status" class="muted">Waiting for a synthetic test.</div></div></div>
+</section>
+<section class="view" id="view-shield">
+<div class="section-heading"><div><span class="eyebrow">MODULE 03 / DEFENSIVE SELF-PROTECTION</span><h2>SignalBreak Shield</h2><p>Local safeguards for this application. This is not an endpoint security product.</p></div><span class="pill"><i class="status-dot"></i> MONITORING</span></div>
+<div class="module-grid"><article class="panel"><span class="eyebrow">APP INTEGRITY</span><h3>File fingerprint</h3><p>Calculate SHA-256 fingerprints for the app's core files as served by this local instance.</p><button class="secondary" id="integrity-check">Run integrity check</button><pre id="integrity-result">No check performed.</pre></article><article class="panel"><span class="eyebrow">EMERGENCY CONTROL</span><h3>Session lock</h3><p>Lock the interface until the local unlock action is used. This is a convenience safeguard, not device-level protection.</p><button class="danger" id="shield-lock">Lock SignalBreak</button></article><article class="panel"><span class="eyebrow">EVENT JOURNAL</span><h3>Local activity</h3><p>Events are stored in this browser's local storage. A checksum chain is a prototype aid, not a cryptographic audit guarantee.</p><div class="button-row"><button class="secondary" id="export-journal">Export journal</button><button class="secondary" id="backup-data">Download backup</button></div></article></div>
+<div class="panel"><div class="panel-head"><h3>Defensive event journal</h3><button class="text-button" id="clear-journal">Clear local journal</button></div><div id="journal" class="journal"></div></div>
+</section>
+<section class="view" id="view-license">
+<div class="section-heading"><div><span class="eyebrow">ACCESS / DEPLOYMENT PROFILE</span><h2>License & access</h2><p>Prototype profile information. No government authorization, certification or production license is implied.</p></div></div>
+<div class="panel license-panel"><div><span class="eyebrow">CURRENT PROFILE</span><h3>Developer Edition</h3><p>Local development and evaluation profile.</p></div><div class="license-grid"><div><small>MODE</small><b>LOCAL</b></div><div><small>LICENSE STATUS</small><b class="good">DEVELOPMENT</b></div><div><small>VERIFICATION</small><b>NOT CONFIGURED</b></div><div><small>NETWORK ACTIONS</small><b>DISABLED</b></div></div><p class="muted">Future signed-license support should verify offline license documents with a public key. The private signing key must remain outside this client application. Government deployments require separate legal authorization, security review and procurement approval.</p></div>
+</section>
+<footer>SignalBreak • Local-first research prototype • No transmission • No live-network impairment</footer>
+</main>
+</div>
+<div class="lock-screen hidden" id="lock-screen"><div class="lock-card"><div class="brand-mark">S</div><h2>Session locked</h2><p>SignalBreak is paused locally.</p><button class="primary" id="unlock-button">Unlock session</button></div></div>
+<script src="app.js"></script>
+</body></html>
